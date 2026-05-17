@@ -1,0 +1,59 @@
+---
+title: "AI Dungeon Master — Design-to-Code"
+client: "Personal project"
+role: "Designer-developer · solo"
+year: "2025 — present"
+order: 5
+accent: blue
+summary: >-
+  A mobile-first AI Dungeon Master that runs the D&amp;D 5e Tyranny of Dragons campaign with
+  Claude as the DM. The project is my practice ground for the design-to-code workflow I lead
+  internally at MetLife — Figma MCP, Claude Code, bidirectional token sync, and a working
+  design-sync log instead of a hand-off folder.
+team: "Solo"
+tools: ["Figma", "Figma MCP", "Claude Code", "Next.js", "React", "Tailwind", "PostgreSQL", "Railway"]
+metrics:
+  - { value: "Bi-directional", label: "Figma ↔ code workflow" }
+  - { value: "Live", label: "Tokens as the contract" }
+status: published
+---
+
+import Callout from '../../components/Callout.astro';
+
+## Brief
+
+Internally at MetLife I'm driving a design-to-code initiative — Figma MCP, GitHub Copilot, Claude Code — to reduce the lag between a Figma decision and a production-grade React change. I wanted a personal project to stress-test the workflow end-to-end, on a real codebase, without the constraints of an enterprise environment.
+
+The AI Dungeon Master is that project: a mobile-first PWA that runs a D&amp;D campaign with Claude as the narrator, full character sheets, dice, persistent state, and offline-friendly messaging. It's a Next.js 15 / React 19 / Tailwind / PostgreSQL app on Railway, with Claude Sonnet 4.6 for narration via the Anthropic SDK's tool-use for structured game-state updates.
+
+## Process
+
+The interesting part isn't the app — it's the **workflow** the app forced me to formalise.
+
+### Figma → Code (the obvious direction)
+
+- **Tokens as the contract.** Primitive spacing/colour/radius variables in Figma map to CSS custom properties in `globals.css`, and the Tailwind config documents the mapping inline. No "magic numbers" survive a design review.
+- **Component-level sync.** When the navigation flattened from 5 → 4 tabs and the More overflow disappeared, the change started in Figma and propagated through `Navigation.tsx`, verified against variant specs (padding, gap, colour tokens).
+- **Token-level corrections caught at sync time.** Example: a `SystemMessage/error` padding was bound to `radius/lg` in Figma — same 12px value as `spacing/12`, wrong token. The sync surfaced the mismatch before it shipped.
+
+### Code → Figma (the direction nobody talks about)
+
+- Built the Navigation component set in Figma **from the React code** — six icon vectors, eight `NavItem` variants, four `MoreMenuItem` variants, plus the full bar and overflow panel. The Figma file is now a faithful mirror, not a stale spec.
+
+### The design-sync log
+
+Pending changes live in a `DESIGN_SYNC.md` at the repo root. Each entry says *which direction* the change is moving (Figma → Code, Code → Figma, Bug fix — Code only) and what's checked off. When the change ships, the entry moves from **Pending** to **Resolved**. The log is the audit trail that lets a solo engineer-designer keep two surfaces in lock-step without losing track.
+
+<Callout title="Treat the design system as code, both ways" accent="blue">
+The lever isn't "designers should write code" or "engineers should use Figma." It's making the **token layer** the single source of truth and committing to bidirectional syncs — including the unglamorous direction where the engineer rebuilds the Figma component to match what shipped. That's where most design systems decay.
+</Callout>
+
+<Callout title="One AI for the narrative, another for the build" accent="yellow">
+Claude narrates the game inside the app *and* writes the code outside it. Two distinct loops, same model family. The internal-tooling story I tell at MetLife — that AI-assisted design and AI-assisted engineering compound — got a lot easier to make once I'd actually shipped a working system on both ends.
+</Callout>
+
+## Outcome
+
+A working game, on my phone, with the same Figma → code → production loop I'm pushing for at work — minus the corporate guardrails. The personal project is the proof; the work project is the application.
+
+The repo is private during development; happy to walk through it live.

@@ -1,0 +1,53 @@
+---
+title: "Japan Cosmetic Licensing Association — Member Site"
+client: "Japan Cosmetic Licensing Association (JCLA)"
+role: "IA · UI design · form redesign"
+year: "~2018"
+order: 3
+accent: yellow
+summary: >-
+  JCLA's membership area had grown into a sprawling member-only tree with 30+ leaf pages
+  spread across six top-level groups. I led an IA restructure that collapsed it into eight
+  grouped destinations behind a single side menu, then rebuilt the desktop and mobile UI and
+  the registration form around it.
+team: "Trifort delivery team"
+tools: ["Adobe XD", "Illustrator"]
+metrics:
+  - { value: "30+ → 8", label: "Top-level destinations" }
+  - { value: "1×", label: "Member-only gate (was 6)" }
+gallery:
+  - { src: "/images/cosmetics/desktopUI.png", alt: "JCLA member top — desktop", caption: "Member top — desktop, post-restructure" }
+  - { src: "/images/cosmetics/mobileui.png", alt: "JCLA member top — mobile", caption: "Member top — mobile" }
+  - { src: "/images/cosmetics/formui.png", alt: "Member registration form — mobile, step 1 of 4 with inline validation", caption: "Registration form — step 1 of 4, mobile, with inline validation" }
+galleryColumns: 3
+heroAsset: "/images/cosmetics/desktopUI.png"
+status: published
+draftNote: "Trifort-era client work, ~2018. Draft narrative — Felipe to refine with original brief context."
+---
+
+import CosmeticsSitemap from '../../components/diagrams/CosmeticsSitemap.astro';
+import Callout from '../../components/Callout.astro';
+
+## Brief
+
+JCLA's member site had accumulated. Each new programme — events, study mail magazines, video service, cosmetic-concierge curriculum, jobs board, member-only downloads — had been added as its own branch, and members were expected to know which branch to look under. Most of the content was member-only, and the member gate was repeated up and down the tree.
+
+The brief was to make the member area **usable on the first visit** and to simplify the surface enough that maintaining it didn't require keeping the whole map in your head.
+
+## Process
+
+The first artifact was a sitemap of what existed. The pattern fell out of the diagram almost immediately: the page graph was wide, the member gate was leaking into every branch, and roughly two-thirds of the leaves were variations on the same destination.
+
+<CosmeticsSitemap />
+
+From there, the IA work was straightforward: identify the genuine destinations (eight), make them direct children of a single side menu, and pull the member gate up to one place — the side menu itself.
+
+The UI and form redesign followed the same logic. The registration form went from a single long page to a four-step process with inline validation; the desktop top page surfaces news, calendar, and topics in a single scan; the mobile top is a faithful one-column reflow without dropping density.
+
+<Callout title="One member gate, not six" accent="yellow">
+Pulling the gate up to the side menu meant every member-only page could drop its own gating logic. Smaller change for engineering, simpler mental model for members, and dramatically easier to add new member-only content later without re-litigating the access pattern.
+</Callout>
+
+## Outcome
+
+A site that members can navigate on their first visit, with maintenance load proportional to the number of destinations (eight) rather than the number of leaves (30+). Form completion improved in qualitative testing once steps and validation replaced the long single page.

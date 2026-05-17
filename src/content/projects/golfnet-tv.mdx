@@ -1,0 +1,46 @@
+---
+title: "GolfNet TV — Mobile Streaming App"
+client: "GolfNet (live golf coverage)"
+role: "UI design · interaction design"
+year: "~2018"
+order: 4
+accent: red
+summary: >-
+  A mobile app for live golf coverage with a two-channel concurrent stream pattern.
+  Designed the tutorial-led onboarding, the live/VOD library, channel switching, and the
+  account &amp; settings surfaces.
+team: "Trifort delivery team"
+tools: ["Adobe XD", "Illustrator"]
+metrics:
+  - { value: "2", label: "Concurrent live channels (1CH / 2CH)" }
+  - { value: "Gesture-led", label: "Channel switching (swipe)" }
+gallery:
+  - { src: "/images/golfnet-tv/1.png", alt: "Splash and onboarding screens explaining the 1CH / 2CH swipe gesture", caption: "Splash + onboarding — explaining the 1CH/2CH swipe gesture" }
+  - { src: "/images/golfnet-tv/webview.png", alt: "VOD library — vertical list of past programmes", caption: "VOD library" }
+  - { src: "/images/golfnet-tv/4.png", alt: "Live stream view in-hand, with concurrent schedule below the player", caption: "Live stream view — player + concurrent schedule" }
+  - { src: "/images/golfnet-tv/2.png", alt: "App Store listing and live stream view side by side", caption: "App Store listing and live stream view" }
+heroAsset: "/images/golfnet-tv/4.png"
+status: published
+draftNote: "Trifort-era client work, ~2018. Draft narrative — Felipe to refine with original brief context."
+---
+
+import Callout from '../../components/Callout.astro';
+
+## Brief
+
+A mobile streaming app for live golf, where the defining product idea was running **two concurrent live channels** the viewer can switch between with a swipe. The product hinges on getting that gesture right: discoverable on first launch, then invisible afterwards.
+
+## Process
+
+- **Tutorial-led onboarding** — splash + a single coachmark screen explaining the 1CH/2CH swipe with a clear hand gesture and dimmed live feed behind. The tutorial appears once, then never again.
+- **Player layout** — live video pinned to the top, concurrent schedule below. The schedule density is intentionally high; this is a viewer who knows what they're looking for.
+- **Library** — VOD as a vertical list with consistent thumbnail + title + duration formatting. Episode covers do the work; chrome stays out of the way.
+- **Settings & login** — kept conservative; this is a video app and the surface area outside the player should be small.
+
+<Callout title="Onboard the gesture once, then disappear" accent="red">
+Gesture-led navigation is a UX hazard when overdone, but it's the right call here because the two-channel model *is* the product. The coachmark earns its keep on first launch; everything after that trusts the viewer.
+</Callout>
+
+## Outcome
+
+A first-launch flow that makes the differentiator (concurrent channels) immediately discoverable, with a player surface that gets out of the way for repeat viewing.
