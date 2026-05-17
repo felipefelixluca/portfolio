@@ -1,23 +1,35 @@
 #!/usr/bin/env node
 /**
- * Post-build: encrypt every dist/**\/*.html file in place using StatiCrypt.
+ * Post-build: encrypt the case-study pages under dist/work/ in place.
+ *
+ * Home, About, 404, the CV PDF, fonts and images all remain public.
+ * Only dist/work/**\/*.html is gated — so a LinkedIn visitor sees the
+ * brand, intro and downloadable CV, but the actual case studies require
+ * the password.
  *
  * Why we expand the glob in Node rather than letting the shell do it:
- * PowerShell on Windows does not expand `dist/**\/*.html` — StatiCrypt
+ * PowerShell on Windows does not expand `dist/work/**\/*.html` — StatiCrypt
  * receives the literal string and tries to stat it.
  *
  * Password source: $STATICRYPT_PASSWORD (preferred) or $PASSWORD.
  */
 import { spawnSync } from 'node:child_process';
-import { existsSync, readdirSync, statSync } from 'node:fs';
-import { join, relative, resolve } from 'node:path';
+import { existsSync, readdirSync, readFileSync, statSync, unlinkSync, writeFileSync } from 'node:fs';
+import { randomBytes } from 'node:crypto';
+import { basename, dirname, join, relative, resolve } from 'node:path';
 
 const root = resolve(process.cwd());
 const dist = join(root, 'dist');
+const gatedRoot = join(dist, 'work');
 
 if (!existsSync(dist)) {
   console.error('[encrypt] dist/ not found. Run `astro build` first.');
   process.exit(1);
+}
+
+if (!existsSync(gatedRoot)) {
+  console.warn('[encrypt] dist/work/ not found — nothing to gate. Skipping.');
+  process.exit(0);
 }
 
 const password =
@@ -44,35 +56,66 @@ function findHtml(dir) {
   return out;
 }
 
-const files = findHtml(dist).map((f) => relative(root, f).replaceAll('\\', '/'));
+const files = findHtml(gatedRoot).map((f) => relative(root, f).replaceAll('\\', '/'));
 
 if (files.length === 0) {
-  console.error('[encrypt] No HTML files found under dist/. Nothing to encrypt.');
-  process.exit(1);
+  console.warn('[encrypt] No HTML files found under dist/work/. Nothing to encrypt.');
+  process.exit(0);
 }
 
-console.log(`[encrypt] encrypting ${files.length} file(s) under dist/`);
+console.log(`[encrypt] gating ${files.length} case-study file(s) under dist/work/ (home, about, CV stay public)`);
 
-const args = [
-  'staticrypt',
-  ...files,
-  '--password',
-  password,
-  // overwrite the originals in place (no _encrypted suffix)
-  '--directory',
-  'dist',
-  // shorter base-path-relative URLs after unlock
-  '--short',
-];
-
-const r = spawnSync('npx', ['--yes', ...args], {
-  stdio: 'inherit',
-  shell: process.platform === 'win32',
-});
-
-if (r.status !== 0) {
-  console.error('[encrypt] StatiCrypt failed.');
-  process.exit(r.status ?? 1);
+// Use ONE shared salt across every encrypted page so a visitor who unlocks
+// one case study can browse the others without being prompted again.
+// StatiCrypt looks for `.staticrypt.json` next to each input file and
+// generates a fresh salt if it can't find one; per-file invocations would
+// therefore produce 5 different salts. We side-step that by reading the
+// committed root salt (creating it if missing) and passing it explicitly.
+const rootSaltFile = join(root, '.staticrypt.json');
+let salt;
+if (existsSync(rootSaltFile)) {
+  salt = JSON.parse(readFileSync(rootSaltFile, 'utf8')).salt;
+} else {
+  salt = randomBytes(16).toString('hex');
+  writeFileSync(rootSaltFile, JSON.stringify({ salt }, null, 4));
+  console.log(`[encrypt] generated new root salt: ${salt} (commit .staticrypt.json so CI re-uses it)`);
 }
 
-console.log(`[encrypt] All ${files.length} dist/*.html files encrypted.`);
+// StatiCrypt with --directory <dir> writes every input as <dir>/<basename>,
+// so passing multiple `index.html` files at once would collide on the same
+// output path. Per-file invocation with cwd set to the file's parent dir
+// makes the encrypted output replace the source in place.
+for (const file of files) {
+  const parent = dirname(file);
+  const r = spawnSync(
+    'npx',
+    [
+      '--yes',
+      'staticrypt',
+      basename(file),
+      '--password',
+      password,
+      '--salt',
+      salt,
+      '--directory',
+      '.',
+      '--short',
+    ],
+    {
+      stdio: 'inherit',
+      shell: process.platform === 'win32',
+      cwd: parent,
+    }
+  );
+  if (r.status !== 0) {
+    console.error(`[encrypt] StatiCrypt failed on ${file}`);
+    process.exit(r.status ?? 1);
+  }
+  // Tidy up: drop the per-directory `.staticrypt.json` StatiCrypt writes,
+  // since the root copy is the source of truth and the salt is already
+  // embedded in the encrypted HTML.
+  const stray = join(parent, '.staticrypt.json');
+  if (existsSync(stray)) unlinkSync(stray);
+}
+
+console.log(`[encrypt] All ${files.length} case-study HTML file(s) encrypted in place with shared salt.`);

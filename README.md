@@ -1,6 +1,10 @@
 # Felipe Felix Castro — Portfolio
 
-Static Astro site, Bauhaus-inspired, password-gated with StatiCrypt, deployed to GitHub Pages.
+Static Astro site, Bauhaus-inspired, deployed to GitHub Pages.
+
+**What's public, what's gated:**
+- ✅ **Public** — home, about, downloadable CV PDF, favicon, images, fonts. Linkable from LinkedIn.
+- 🔒 **Password-gated (StatiCrypt)** — every case study under `/work/*`. Visitors hit a password prompt when they click a project. The password unlocks all case studies for the browser session.
 
 ## Stack
 
@@ -60,12 +64,16 @@ All redrawn from the original Adobe Portfolio screenshots and intended to be rea
 
 ## Password
 
-Set in the environment as `STATICRYPT_PASSWORD` (or `PASSWORD`).
+Only the case studies under `/work/*` are encrypted. Home, about, and the CV PDF stay public.
+
+Set the password in the environment as `STATICRYPT_PASSWORD` (or `PASSWORD`).
 
 - **Locally:** `$env:STATICRYPT_PASSWORD = "<removed>"` before `npm run build`.
 - **CI:** repo Settings → Secrets and variables → Actions → `STATICRYPT_PASSWORD`.
 
 To rotate: change the secret in GitHub and re-run the workflow (or push any commit to `main`).
+
+StatiCrypt remembers the password in `localStorage` for the visitor's browser, so once they unlock one case study they can navigate freely between all five without re-entering it.
 
 ## Deploy to GitHub Pages
 
