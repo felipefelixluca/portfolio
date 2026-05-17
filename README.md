@@ -29,7 +29,7 @@ npm run build:unencrypted
 npm run preview
 
 # full production build (Astro + StatiCrypt encryption)
-$env:STATICRYPT_PASSWORD = "<removed>"
+$env:STATICRYPT_PASSWORD = "<your-password>"
 npm run build
 npm run preview
 ```
@@ -68,7 +68,7 @@ Only the case studies under `/work/*` are encrypted. Home, about, and the CV PDF
 
 Set the password in the environment as `STATICRYPT_PASSWORD` (or `PASSWORD`).
 
-- **Locally:** `$env:STATICRYPT_PASSWORD = "<removed>"` before `npm run build`.
+- **Locally:** `$env:STATICRYPT_PASSWORD = "<your-password>"` before `npm run build`.
 - **CI:** repo Settings → Secrets and variables → Actions → `STATICRYPT_PASSWORD`.
 
 To rotate: change the secret in GitHub and re-run the workflow (or push any commit to `main`).
@@ -100,7 +100,7 @@ Then in the GitHub web UI for the new repo:
 1. **Settings → Pages → Source**: choose **GitHub Actions**.
 2. **Settings → Secrets and variables → Actions → New repository secret**:
    - Name: `STATICRYPT_PASSWORD`
-   - Value: `<removed>`
+   - Value: `<your-password>`
 3. **(Only for Option A — project-pages repo)** Settings → Secrets and variables → Actions → **Variables** tab → New repository variable:
    - Name: `BASE_PATH`
    - Value: `/portfolio`
@@ -108,7 +108,7 @@ Then in the GitHub web UI for the new repo:
    - Option A: `https://felipefelixluca.github.io/portfolio/`
    - Option B: `https://felipefelixluca.github.io/`
 
-Share the URL plus the password (`<removed>`).
+Share the URL plus the password out-of-band (e.g. LinkedIn DM, email). Never commit the literal password to the repo.
 
 ## Security note
 

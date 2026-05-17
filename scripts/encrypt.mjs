@@ -38,7 +38,7 @@ const password =
 if (!password) {
   console.error(
     '[encrypt] STATICRYPT_PASSWORD not set.\n' +
-      '          For local builds: PowerShell `$env:STATICRYPT_PASSWORD = "<removed>"; npm run build`\n' +
+      '          For local builds: PowerShell `$env:STATICRYPT_PASSWORD = "<your-password>"; npm run build`\n' +
       '          For CI: set the STATICRYPT_PASSWORD repo secret.'
   );
   process.exit(1);
