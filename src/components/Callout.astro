@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  accent?: 'red' | 'yellow' | 'blue';
+}
+
+const { title, accent = 'red' } = Astro.props;
+
+const bg = {
+  red: 'bg-bauhaus-red text-paper',
+  yellow: 'bg-bauhaus-yellow text-ink',
+  blue: 'bg-bauhaus-blue text-paper',
+}[accent];
+---
+
+<aside class={`my-10 border-2 border-ink`}>
+  <div class={`${bg} px-6 py-3`}>
+    <p class="font-mono text-eyebrow uppercase tracking-[0.18em]">Decision</p>
+    <p class="font-display text-xl font-bold mt-1">{title}</p>
+  </div>
+  <div class="px-6 py-5 bg-paper text-ink">
+    <slot />
+  </div>
+</aside>

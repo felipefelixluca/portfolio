@@ -1,0 +1,102 @@
+---
+// DevOps & Scrum process timeline (Empathize → Test)
+// Redrawn from MetLife/devopsworkflow.png — Bauhaus palette, monochrome-safe.
+const phases = [
+  {
+    label: 'Empathize',
+    activity: 'UX audit · Usage analysis · Requirement analysis',
+    artifact: 'Sprints',
+    color: 'bauhaus-red',
+  },
+  {
+    label: 'Define',
+    activity: 'Design Sprints · Lo-fi design',
+    artifact: 'Design Sprint outputs',
+    color: 'bauhaus-yellow',
+  },
+  {
+    label: 'Ideate',
+    activity: 'Design ideation · Formative user research (Usability test 1)',
+    artifact: 'Guerilla usability test',
+    color: 'bauhaus-blue',
+  },
+  {
+    label: 'Prototype',
+    activity: 'Design prototyping · Development & design clarification',
+    artifact: 'Hi-fi design · Design guide',
+    color: 'bauhaus-red',
+  },
+  {
+    label: 'Test',
+    activity: 'Summative user research (Usability test 2) · Deployment · Iteration',
+    artifact: 'Design iteration & continuous kaizen',
+    color: 'bauhaus-yellow',
+  },
+];
+---
+
+<figure class="my-12 border-2 border-ink">
+  <figcaption class="border-b-2 border-ink bg-ink text-paper px-5 py-3 font-mono text-eyebrow uppercase tracking-[0.18em]">
+    DevOps &amp; Scrum process — Empathize → Test
+  </figcaption>
+
+  <div class="bg-paper">
+    {/* Desktop / tablet — horizontal */}
+    <div class="hidden md:block px-10 py-12">
+      <div class="relative">
+        {/* baseline */}
+        <div class="absolute left-0 right-0 top-[42px] h-[2px] bg-ink"></div>
+
+        <div class="grid grid-cols-5 gap-0 relative">
+          {phases.map((p, i) => (
+            <div class="px-3">
+              <div class="flex items-center justify-center h-[84px]">
+                <span class={`block h-8 w-8 ${p.color === 'bauhaus-yellow' ? 'bg-bauhaus-yellow' : p.color === 'bauhaus-blue' ? 'bg-bauhaus-blue' : 'bg-bauhaus-red'} border-2 border-ink`}
+                  style="transform: translateY(-2px);"
+                ></span>
+              </div>
+              <div class="mt-3 text-center">
+                <p class="font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">Phase 0{i + 1}</p>
+                <p class="mt-1 font-display text-2xl font-bold leading-tight">{p.label}</p>
+                <p class="mt-3 text-sm leading-snug">{p.activity}</p>
+                <p class="mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">{p.artifact}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-10 grid grid-cols-3 gap-6 border-t-2 border-ink pt-6">
+        <div>
+          <p class="font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">Hand-off cadence</p>
+          <p class="mt-1 text-sm">Design Sprints → Hi-fi → Hand-over → User test data</p>
+        </div>
+        <div>
+          <p class="font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">Team shape</p>
+          <p class="mt-1 text-sm">DevOps &amp; Scrum team, 2 FTE + vendor designers</p>
+        </div>
+        <div>
+          <p class="font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">Loop</p>
+          <p class="mt-1 text-sm">Repeated user tests &amp; rapid iteration based on the data</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Mobile — vertical */}
+    <ol class="md:hidden divide-y-2 divide-ink">
+      {phases.map((p, i) => (
+        <li class="flex gap-4 px-5 py-6">
+          <span class="shrink-0 mt-1">
+            <span class={`block h-5 w-5 ${p.color === 'bauhaus-yellow' ? 'bg-bauhaus-yellow' : p.color === 'bauhaus-blue' ? 'bg-bauhaus-blue' : 'bg-bauhaus-red'} border-2 border-ink`}></span>
+          </span>
+          <div>
+            <p class="font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">Phase 0{i + 1}</p>
+            <p class="mt-1 font-display text-xl font-bold">{p.label}</p>
+            <p class="mt-2 text-sm">{p.activity}</p>
+            <p class="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">{p.artifact}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</figure>

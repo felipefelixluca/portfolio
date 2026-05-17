@@ -1,0 +1,41 @@
+---
+// Jiro-san persona digital journey (next-of-kin update)
+// Redrawn from MetLife/journeyoverview.png.
+const steps = [
+  { goal: 'Find a way to change the recipient', action: 'Navigate to MetLife.co.jp → portal', state: 'firm' },
+  { goal: 'Register an ID, log in for the first time', action: 'Guide to contract overview', state: 'firm' },
+  { goal: 'Find which contract holds the existing recipient info', action: 'Show recipient info under each contract detail', state: 'firm' },
+  { goal: 'Change the contract details', action: 'Show recipient-change procedure menu', state: 'firm' },
+  { goal: 'Start the procedure', action: 'Show eligible contracts to act on', state: 'firm' },
+  { goal: 'Select a contract', action: 'Move to the input screen', state: 'firm' },
+  { goal: 'Wait for completion', action: 'Send progress notifications', state: 'firm' },
+  { goal: 'Move on to the next procedure', action: 'Show the next-procedure list', state: 'firm' },
+  { goal: 'Possibility to start a new procedure', action: 'Surface adjacent procedures (suggestion)', state: 'dashed' },
+];
+---
+
+<figure class="my-12 border-2 border-ink">
+  <figcaption class="border-b-2 border-ink bg-ink text-paper px-5 py-3 flex items-center justify-between">
+    <span class="font-mono text-eyebrow uppercase tracking-[0.18em]">Persona journey — Jiro-san (digital next-of-kin update)</span>
+    <span class="font-mono text-eyebrow uppercase tracking-[0.18em] opacity-70 hidden md:inline">Experience Design Group</span>
+  </figcaption>
+
+  <div class="bg-paper px-6 py-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-ink border-2 border-ink">
+      {steps.map((s, i) => (
+        <div class={`bg-paper p-5 relative ${s.state === 'dashed' ? 'outline outline-2 outline-dashed outline-ink' : ''}`}>
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">Step 0{i + 1}</span>
+            <span class={`block h-3 w-3 ${s.state === 'dashed' ? 'border-2 border-ink' : 'bg-bauhaus-red'}`}></span>
+          </div>
+          <p class="mt-3 font-display text-base font-bold leading-tight">{s.goal}</p>
+          <p class="mt-2 font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">System response</p>
+          <p class="mt-1 text-sm">{s.action}</p>
+        </div>
+      ))}
+    </div>
+    <p class="mt-6 font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">
+      Dashed step = exploratory / "what if" — surfaced as opportunity, not committed scope.
+    </p>
+  </div>
+</figure>

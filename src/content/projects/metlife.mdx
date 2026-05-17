@@ -1,0 +1,71 @@
+---
+title: "MetLife Japan — Customer Portal"
+client: "MetLife Japan"
+role: "Lead UX designer · user research · prototyping · UI design"
+year: "2021 — present"
+order: 1
+accent: red
+summary: >-
+  Redesigned the post-purchase Customer Portal as part of MetLife Japan's digital transformation.
+  A registration-flow revision delivered +30% completion and 40% faster time-to-complete; the
+  surrounding sales-platform programme accelerated digital sales by 40%.
+team: "7-person UX team (2 FTE + 5 vendors), DevOps & Scrum"
+tools: ["Adobe XD", "Illustrator", "Adobe Analytics", "Azure", "Miro"]
+metrics:
+  - { value: "+30%", label: "Registration completion" }
+  - { value: "40% ↓", label: "Time to complete" }
+  - { value: "+40%", label: "Faster digital sales" }
+  - { value: "+11%", label: "Key procedure completion" }
+gallery:
+  - { src: "/images/metlife/uidesign.png", alt: "Customer Portal — selected screens (PC + SP)", caption: "Selected Customer Portal screens — desktop and mobile" }
+  - { src: "/images/metlife/met-4.png", alt: "Other MetLife Japan environments — Operations Portal, Producers Portal, Customer Portal mapped together", caption: "The Customer Portal is one of several environments the UX team owns" }
+  - { src: "/images/metlife/userflow.jpg", alt: "Full Miro userflow covering Customer Portal, IDM, family registration, e-service", caption: "End-to-end userflow — Miro" }
+galleryColumns: 2
+heroAsset: "/images/metlife/uidesign.png"
+status: published
+---
+
+import DevOpsTimeline from '../../components/diagrams/DevOpsTimeline.astro';
+import CustomerJourney from '../../components/diagrams/CustomerJourney.astro';
+import JourneyOverview from '../../components/diagrams/JourneyOverview.astro';
+import Callout from '../../components/Callout.astro';
+
+## Brief
+
+The Customer Portal is one of MetLife Japan's central digital-transformation initiatives, focused on the **post-purchase experience**. Customers were buying policies through agents but rarely returning to the portal afterwards — and when they did, dense screens and an OTP-heavy login made high-intent tasks (changing a beneficiary, updating a billing preference, checking a contract) harder than they needed to be.
+
+My role across the engagement: lead UX designer on the portal, with responsibility for research design, prototyping, hi-fi UI, and the cross-functional partnership that gets a design actually shipped.
+
+## Process
+
+We work inside a DevOps &amp; Scrum cadence. Rather than running a separate "design phase" off to the side, we fold research, prototyping, and validation **into the same sprint rhythm** as engineering — formative testing before development, summative testing after, and a kaizen loop on top.
+
+<DevOpsTimeline />
+
+The journey work below was the anchor artifact used in stakeholder conversations with Claims, Call Center, Customer Care, and IT. Mapping emotion and pain alongside channel and touchpoint forced specificity: instead of debating "the registration is hard," we were debating *which* OTP step was failing for *which* persona at *which* moment.
+
+<CustomerJourney />
+
+For each redesign stream we paired the wide-angle journey with a **persona-specific flow** showing the exact system response we were committing to at each step. Dashed nodes are *opportunities surfaced for the business* — not committed scope — which kept exploratory ideas legible without bloating the engineering backlog.
+
+<JourneyOverview />
+
+## Decisions
+
+<Callout title="OTP stays, but only where the risk model demands it" accent="red">
+We were under real pressure to remove OTP from registration entirely because of the drop-off it caused. Working with the security and compliance partners, we kept OTP at the **identity-binding moment** only and removed it from low-risk re-entry flows — preserving the security posture while cutting drop-off where it actually hurt.
+</Callout>
+
+<Callout title="Journey maps as a meeting format, not a deliverable" accent="yellow">
+Adapted Value Proposition Canvas and journey mapping into short, in-the-flow working sessions for the BAU teams. The output was decisions in the room, not a 40-page artifact filed away — which is what made it usable by Claims and Call Center partners under their own delivery pressure.
+</Callout>
+
+<Callout title="Design system + design-to-code pilot" accent="blue">
+Drove an internal design-to-code initiative (Figma MCP, Copilot, Claude Code) so component changes in Figma propagate to production-grade React without the usual translation lag. Built the onboarding programme and Power Automate intake workflow that standardised how requests flow into the team.
+</Callout>
+
+## Outcome
+
+- **Registration flow** — +30% completion, 40% faster time-to-complete (2026).
+- **Agent sales platform** (parallel programme I led) — 40% faster digital sales process, +11% completion on key procedures; contributed to MetLife Japan hitting its annual NPS targets (2025).
+- **Operating model** — the team now serves Customer Portal, Operations Portal, and Producers Portal in parallel with the same cadence, supporting Claims, Call Center, Customer Care, and IT.

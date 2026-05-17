@@ -1,0 +1,48 @@
+---
+interface Props {
+  invert?: boolean;
+}
+const { invert = false } = Astro.props;
+
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+const here = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const links = [
+  { href: `${BASE}/`, label: 'Work', match: (p: string) => p === BASE || p === `${BASE}/` || p.startsWith(`${BASE}/work`) },
+  { href: `${BASE}/about`, label: 'About', match: (p: string) => p.startsWith(`${BASE}/about`) },
+  { href: `${BASE}/Felipe_Felix_Castro_CV.pdf`, label: 'CV ↓', external: true, match: () => false },
+];
+
+const baseColor = invert ? 'text-paper' : 'text-ink';
+const baseBg = invert ? 'bg-ink' : 'bg-paper';
+const ruleColor = invert ? 'border-paper' : 'border-ink';
+---
+
+<header class={`${baseBg} ${baseColor} border-b-2 ${ruleColor}`}>
+  <div class="container-page flex items-center justify-between py-5">
+    <a href={`${BASE}/`} class="group flex items-center gap-3">
+      <span class="font-display text-xl font-bold tracking-tight">Felipe Felix</span>
+      <span class="hidden md:inline marker-square" aria-hidden="true"></span>
+      <span class="hidden md:inline text-xs uppercase tracking-[0.18em] opacity-70">UX Design Lead · Tokyo</span>
+    </a>
+    <nav>
+      <ul class="flex items-center gap-6 md:gap-8 text-sm">
+        {links.map((link) => {
+          const isActive = link.match(here);
+          return (
+            <li>
+              <a
+                href={link.href}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener' : undefined}
+                class={`uppercase tracking-[0.16em] font-mono text-eyebrow link-underline ${isActive ? 'font-semibold' : ''}`}
+              >
+                {link.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  </div>
+</header>

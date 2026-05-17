@@ -1,0 +1,150 @@
+---
+// JCLA sitemap restructure — before vs after
+// Redrawn from Cosmetics/original sitemap.png and newsitemap.png.
+// "Before" = sprawling member-only tree across many top-level groups.
+// "After" = collapsed into 8 grouped destinations from a single side menu.
+
+type Node = {
+  label: string;
+  children?: string[];
+  member?: boolean;
+};
+
+const before: { group: string; nodes: Node[] }[] = [
+  {
+    group: 'サービスの案内',
+    nodes: [
+      { label: 'お知らせ', children: ['お知らせページ'], member: true },
+      { label: 'カレンダー', children: ['イベント詳細'], member: true },
+      { label: 'イベント・セミナー', children: ['申込み'], member: true },
+      { label: '動画', children: ['ロゴダウンロード'], member: true },
+      { label: '会員特別割引サービス', member: true },
+      { label: '勉強メルマガ', member: true },
+      { label: '会員メルマガ', member: true },
+      { label: 'リーフレット無料提供', member: true },
+    ],
+  },
+  {
+    group: '各種支援制度',
+    nodes: [
+      { label: '全般相談', children: ['申込み'] },
+      { label: '医療機器等', children: ['申込み'] },
+    ],
+  },
+  {
+    group: 'コスメコンシェルジュ',
+    nodes: [
+      { label: 'インストラクター' },
+      { label: 'カリキュラム', children: ['ログイン'] },
+      { label: '認定試験・資格申請' },
+    ],
+  },
+  {
+    group: '求人情報',
+    nodes: [
+      { label: '求人情報一覧', member: true },
+      { label: 'メール配信サービス', member: true },
+    ],
+  },
+  {
+    group: '法人正会員 / 認定校 各種サービス',
+    nodes: [
+      { label: 'サロン一覧' },
+      { label: '認定スクール一覧' },
+      { label: '各種申込み・ダウンロード', member: true },
+    ],
+  },
+  {
+    group: 'サイドリンク',
+    nodes: [
+      { label: '公式テキスト (pdf)' },
+      { label: '各種手続きのご案内' },
+    ],
+  },
+];
+
+const after = [
+  'お知らせ',
+  'イベントカレンダー',
+  '動画配信サービス',
+  '相談お問い合わせ',
+  'コスメコンシェルジュ',
+  'メルマガ',
+  '化粧品の成分検索',
+  '個人正会員',
+];
+---
+
+<figure class="my-12 border-2 border-ink">
+  <figcaption class="border-b-2 border-ink bg-ink text-paper px-5 py-3 font-mono text-eyebrow uppercase tracking-[0.18em]">
+    Sitemap — before / after
+  </figcaption>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 divide-y-2 lg:divide-y-0 lg:divide-x-2 divide-ink bg-paper">
+    {/* Before */}
+    <div class="p-6">
+      <div class="flex items-baseline justify-between">
+        <p class="font-display text-2xl font-bold">Before</p>
+        <p class="font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">6 top-level groups · 30+ leaves</p>
+      </div>
+      <p class="mt-2 text-sm text-muted">Pink/violet items are member-only — buried behind login.</p>
+
+      <div class="mt-6 space-y-4">
+        {before.map((g) => (
+          <div class="border-2 border-ink">
+            <p class="bg-ink text-paper px-3 py-2 font-mono text-eyebrow uppercase tracking-[0.18em]">{g.group}</p>
+            <ul class="divide-y divide-ink/30">
+              {g.nodes.map((n) => (
+                <li class={`flex items-start gap-3 px-3 py-2 text-sm ${n.member ? 'bg-bauhaus-red/15' : ''}`}>
+                  <span class={`mt-1 inline-block h-2 w-2 ${n.member ? 'bg-bauhaus-red' : 'bg-ink'}`}></span>
+                  <span>
+                    <span class="font-medium">{n.label}</span>
+                    {n.children && (
+                      <span class="block text-xs text-muted">↳ {n.children.join(' · ')}</span>
+                    )}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* After */}
+    <div class="p-6">
+      <div class="flex items-baseline justify-between">
+        <p class="font-display text-2xl font-bold">After</p>
+        <p class="font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">1 side menu · 8 destinations</p>
+      </div>
+      <p class="mt-2 text-sm text-muted">Member gates collapsed into one login boundary; everything else is one click.</p>
+
+      <ol class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-px bg-ink border-2 border-ink">
+        {after.map((label, i) => (
+          <li class="bg-paper p-4">
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">0{i + 1}</span>
+              <span class="block h-2 w-2 bg-bauhaus-blue"></span>
+            </div>
+            <p class="mt-2 font-display text-base font-bold leading-tight">{label}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div class="mt-8 grid grid-cols-3 gap-px bg-ink border-2 border-ink">
+        <div class="bg-paper p-4">
+          <p class="font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">Removed</p>
+          <p class="mt-1 font-display text-2xl font-bold">22+</p>
+        </div>
+        <div class="bg-paper p-4">
+          <p class="font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">Collapsed</p>
+          <p class="mt-1 font-display text-2xl font-bold">6 → 1</p>
+        </div>
+        <div class="bg-paper p-4">
+          <p class="font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">Member gate</p>
+          <p class="mt-1 font-display text-2xl font-bold">1×</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</figure>

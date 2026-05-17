@@ -1,0 +1,28 @@
+---
+interface Props {
+  client: string;
+  role: string;
+  year: string;
+  team?: string;
+  tools?: string[];
+}
+
+const { client, role, year, team, tools = [] } = Astro.props;
+
+const items = [
+  { label: 'Client', value: client },
+  { label: 'Role', value: role },
+  { label: 'Year', value: year },
+  team ? { label: 'Team', value: team } : null,
+  tools.length ? { label: 'Tools', value: tools.join(' · ') } : null,
+].filter(Boolean) as { label: string; value: string }[];
+---
+
+<dl class="grid grid-cols-2 md:grid-cols-5 gap-px bg-ink border-2 border-ink">
+  {items.map((item) => (
+    <div class="bg-paper p-5">
+      <dt class="font-mono text-eyebrow uppercase tracking-[0.18em] text-muted">{item.label}</dt>
+      <dd class="mt-2 text-base font-display font-bold leading-tight">{item.value}</dd>
+    </div>
+  ))}
+</dl>
