@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"F:\\\\Projects\\\\Portfolio\\\\site\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(Format-Table -AutoSize)",
+      "mcp__plugin_figma_figma__get_design_context",
+      "mcp__plugin_figma_figma__get_screenshot",
+      "mcp__plugin_figma_figma__get_metadata",
+      "mcp__plugin_figma_figma__use_figma",
+      "Bash(curl -s -o \"F:\\\\Projects\\\\Portfolio\\\\site\\\\.figma-preview.png\" \"https://www.figma.com/api/mcp/asset/c2d6e18e-c5ab-4230-8fd1-fa992471025f\")",
+      "Bash(curl *)"
+    ]
+  }
+}
