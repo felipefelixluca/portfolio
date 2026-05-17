@@ -1,0 +1,38 @@
+Content License
+
+The non-code content of this repository is licensed under
+
+  Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+  (CC BY-NC-ND 4.0)
+
+  Full legal code: https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode
+  Human-readable:  https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+Covered content includes (non-exhaustive):
+
+  - The MDX case studies in src/content/projects/
+  - The screenshots, mockups, and other images in public/images/
+  - The CV PDF at public/Felipe_Felix_Castro_CV.pdf
+  - The site copy in src/pages/ (home, about, 404) and src/layouts/
+  - The diagram contents in src/components/diagrams/ (the data and
+    accompanying narrative, not the rendering scaffold)
+
+In plain English:
+
+  - You MAY view, share, and link to this content for non-commercial purposes.
+  - You MUST credit Felipe Felix Castro as the author and link back to the
+    original (https://felipefelixluca.github.io/portfolio/).
+  - You MUST NOT use it for commercial purposes.
+  - You MUST NOT remix, transform, or build upon it. Republishing this content
+    under your own name — in whole or in part, modified or unmodified — is
+    explicitly not permitted.
+
+If you want to use any of this content outside those terms (for example, to
+republish a case study as part of your own portfolio, training dataset, or
+commercial product), you need written permission. Contact
+felipefelixluca@gmail.com.
+
+Code in this repository (Astro components, scripts, configuration) is
+licensed separately under the MIT License — see LICENSE.
+
+© 2026 Felipe Felix Castro. All rights reserved beyond the grants above.

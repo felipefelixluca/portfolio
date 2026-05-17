@@ -124,6 +124,8 @@ If you need real auth, swap GitHub Pages for **Cloudflare Pages + Cloudflare Acc
 ## Project structure
 
 ```
+LICENSE                        MIT (code only)
+LICENSE-CONTENT                CC-BY-NC-ND-4.0 (case studies, images, CV, site copy)
 .github/workflows/deploy.yml   GitHub Actions — build + deploy
 public/
   Felipe_Felix_Castro_CV.pdf   downloadable CV
@@ -145,3 +147,12 @@ src/
 astro.config.mjs               site, base, integrations
 tailwind.config.mjs            Bauhaus tokens
 ```
+
+## License
+
+This repository uses a **dual license** to separate code from portfolio content:
+
+- **Code** — Astro components, build scripts, Tailwind config, GitHub Actions workflow, and other source files used to render and deploy the site — is licensed under the **MIT License**. See [`LICENSE`](./LICENSE). You're free to copy, modify, and reuse it (including commercially) as long as the copyright notice is preserved.
+- **Content** — the MDX case studies, screenshots, CV PDF, site copy, and diagrams — is licensed under **CC-BY-NC-ND-4.0**. See [`LICENSE-CONTENT`](./LICENSE-CONTENT). You can share and link to it with attribution for non-commercial use, but you cannot republish or remix it under your own name. For any other use, contact felipefelixluca@gmail.com.
+
+If you fork this repo to build your own portfolio, please **delete `src/content/projects/`, `public/images/`, and `public/Felipe_Felix_Castro_CV.pdf`** before adding your own work — those are mine, not a template.
