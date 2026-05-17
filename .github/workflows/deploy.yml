@@ -16,6 +16,15 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# Opt into Node.js 24 for every JavaScript action in this workflow.
+# GitHub starts forcing Node 24 by default on 2026-06-02 and removes Node 20
+# from the runner on 2026-09-16. Some Pages actions (configure-pages,
+# upload-pages-artifact, deploy-pages) haven't shipped a Node-24-native major
+# yet — this env var lets them run on Node 24 today using the existing
+# versions. Safe to remove once all of them publish Node 24 majors.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -30,12 +39,12 @@ jobs:
       STATICRYPT_PASSWORD: ${{ secrets.STATICRYPT_PASSWORD }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
