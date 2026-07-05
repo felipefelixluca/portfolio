@@ -10,15 +10,17 @@ const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 const links = [
   { href: `${BASE}/`, label: 'Work', match: (p: string) => p === BASE || p === `${BASE}/` || p.startsWith(`${BASE}/work`) },
   { href: `${BASE}/about`, label: 'About', match: (p: string) => p.startsWith(`${BASE}/about`) },
-  { href: `${BASE}/Felipe_Felix_Castro_CV.pdf`, label: 'CV ↓', external: true, match: () => false },
 ];
 
 const baseColor = invert ? 'text-paper' : 'text-ink';
 const baseBg = invert ? 'bg-ink' : 'bg-paper';
 const ruleColor = invert ? 'border-paper' : 'border-ink';
+const cvButton = invert
+  ? 'bg-paper text-ink hover:bg-bauhaus-red hover:text-paper'
+  : 'bg-ink text-paper hover:bg-bauhaus-red';
 ---
 
-<header class={`${baseBg} ${baseColor} border-b-2 ${ruleColor}`}>
+<header class={`sticky top-0 z-50 ${baseBg} ${baseColor} border-b-2 ${ruleColor}`}>
   <div class="container-page flex items-center justify-between py-5">
     <a href={`${BASE}/`} class="group flex items-center gap-3">
       <span class="font-display text-xl font-bold tracking-tight">Felipe Felix</span>
@@ -33,8 +35,6 @@ const ruleColor = invert ? 'border-paper' : 'border-ink';
             <li>
               <a
                 href={link.href}
-                target={link.external ? '_blank' : undefined}
-                rel={link.external ? 'noopener' : undefined}
                 class={`uppercase tracking-[0.16em] font-mono text-eyebrow link-underline ${isActive ? 'font-semibold' : ''}`}
               >
                 {link.label}
@@ -42,6 +42,18 @@ const ruleColor = invert ? 'border-paper' : 'border-ink';
             </li>
           );
         })}
+        <li>
+          <a
+            href={`${BASE}/Felipe_Felix_Castro_CV.pdf`}
+            target="_blank"
+            rel="noopener"
+            class={`inline-flex items-center gap-2 px-4 py-2.5 font-mono text-eyebrow uppercase tracking-[0.16em] transition-colors ${cvButton}`}
+          >
+            <span class="hidden sm:inline">Download CV (PDF)</span>
+            <span class="sm:hidden">CV</span>
+            <span aria-hidden="true">↓</span>
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
